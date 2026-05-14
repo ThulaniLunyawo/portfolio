@@ -157,25 +157,27 @@ export default function Portfolio() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-green-400 mx-auto mb-8"></div>
-          <p className="text-green-400 text-xl">Loading Portfolio...</p>
+          <div className="animate-pulse">
+            <div className="h-16 w-16 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full mx-auto mb-6"></div>
+            <p className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Loading Portfolio...</p>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans">
+    <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-black border-b border-green-800 z-50">
+      <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md border-b border-purple-500/20 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-green-400">
+            <h1 className="text-3xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               TL
             </h1>
-            <div className="hidden md:flex items-center gap-6">
+            <div className="hidden md:flex items-center gap-8">
               {[
                 { id: 'home', label: 'Home' },
                 { id: 'about', label: 'About' },
@@ -187,13 +189,16 @@ export default function Portfolio() {
                 <SmoothScrollLink
                   key={id}
                   to={`#${id}`}
-                  className={`px-4 py-2 text-sm transition-colors ${
+                  className={`text-sm font-semibold transition-all duration-300 relative ${
                     activeSection === id
-                      ? 'text-green-400 border-b-2 border-green-400'
-                      : 'text-gray-300 hover:text-green-400'
+                      ? 'bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'
+                      : 'text-gray-300 hover:text-white'
                   }`}
                 >
                   {label}
+                  {activeSection === id && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400"></div>
+                  )}
                 </SmoothScrollLink>
               ))}
             </div>
@@ -202,31 +207,46 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-32 pt-24 bg-black">
-        <div className="max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-green-400">
-            Thulani Lunyawo
+      <section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-6 py-32 pt-24 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-20 left-1/4 w-80 h-80 bg-blue-500 rounded-full mix-blend-screen filter blur-3xl animate-pulse"></div>
+          <div className="absolute top-40 right-1/4 w-80 h-80 bg-purple-500 rounded-full mix-blend-screen filter blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-40 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-screen filter blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        </div>
+
+        <div className="relative z-10 max-w-4xl">
+          <div className="inline-block mb-6 px-6 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-purple-500/50 rounded-full">
+            <span className="text-sm font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Welcome to my portfolio</span>
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-tight">
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Thulani</span>
+            <br/>
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">Lunyawo</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8">
-            <TypeWriter text="ICT Applications Development Graduate" speed={50} />
+          <div className="h-12 mb-8">
+            <p className="text-xl md:text-2xl font-semibold text-gray-300">
+              <TypeWriter text="ICT Applications Development Graduate" speed={50} />
+            </p>
+          </div>
+
+          <p className="text-lg text-gray-300 max-w-2xl leading-relaxed mb-12 mx-auto">
+            Passionate software engineer crafting innovative digital solutions with modern technologies and creative design
           </p>
 
-          <p className="text-gray-400 max-w-xl leading-relaxed mb-12 mx-auto">
-            Passionate software engineer building innovative digital solutions that solve real-world problems
-          </p>
-
-          <div className="flex gap-4 flex-wrap justify-center">
+          <div className="flex gap-6 flex-wrap justify-center">
             <SmoothScrollLink
               to="#projects"
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors"
+              className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold rounded-lg transition-all duration-300 shadow-lg shadow-purple-500/50 hover:shadow-purple-500/75 transform hover:scale-105"
             >
               View My Work
             </SmoothScrollLink>
 
             <SmoothScrollLink
               to="#contact"
-              className="border border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-colors"
+              className="px-8 py-4 border-2 border-purple-500 text-purple-400 hover:bg-purple-500/10 font-bold rounded-lg transition-all duration-300"
             >
               Get In Touch
             </SmoothScrollLink>
@@ -254,40 +274,40 @@ export default function Portfolio() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="px-6 py-24 max-w-6xl mx-auto bg-gray-900">
+      <section id="about" className="px-6 py-24 max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-green-400">
+            <h2 className="text-5xl font-black mb-8 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               About Me
             </h2>
 
             <p className="text-gray-300 leading-8 text-lg mb-6">
-              Recently graduated with a Diploma in ICT in Applications Development from the Cape Peninsula University of Technology, maintaining an impressive average of <span className="text-green-400 font-bold">77%</span>.
+              I recently graduated with a <span className="font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">Diploma in ICT: Applications Development</span> from the Cape Peninsula University of Technology, maintaining an impressive average of <span className="font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">77%</span>.
             </p>
 
-            <p className="text-gray-400 leading-8 text-lg">
-              My technical expertise spans full-stack development, with specialization in Java, Spring Boot, React, and modern software architecture. I'm passionate about Agile methodologies and collaborative team development.
+            <p className="text-gray-300 leading-8 text-lg">
+              My technical expertise spans full-stack development with specialization in Java, Spring Boot, React, and modern software architecture. I'm passionate about Agile methodologies and collaborative team development.
             </p>
           </div>
 
-          <div className="bg-gray-800 p-8 rounded-lg border border-green-800">
-            <h3 className="text-2xl font-bold mb-6 text-green-400">Quick Details</h3>
+          <div className="bg-gradient-to-br from-slate-800/50 to-purple-900/50 border border-purple-500/50 p-8 rounded-2xl backdrop-blur-sm">
+            <h3 className="text-2xl font-bold mb-8 text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">Quick Details</h3>
 
-            <div className="space-y-4">
-              <div className="pb-4 border-b border-green-700">
-                <p className="text-gray-300"><span className="text-green-400 font-bold">📚 Qualification:</span><br/> Diploma in ICT: Applications Development</p>
+            <div className="space-y-6">
+              <div className="pb-4 border-b border-purple-500/30">
+                <p className="text-gray-300"><span className="font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">📚 Qualification:</span><br/> Diploma in ICT: Applications Development</p>
               </div>
 
-              <div className="pb-4 border-b border-green-700">
-                <p className="text-gray-300"><span className="text-green-400 font-bold">📍 Location:</span><br/> Cape Town, South Africa</p>
+              <div className="pb-4 border-b border-purple-500/30">
+                <p className="text-gray-300"><span className="font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">📍 Location:</span><br/> Cape Town, South Africa</p>
               </div>
 
-              <div className="pb-4 border-b border-green-700">
-                <p className="text-green-400 font-bold">🎯 Focus:<br/> Full-Stack Software Development</p>
+              <div className="pb-4 border-b border-purple-500/30">
+                <p className="text-gray-300"><span className="font-bold text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text">🎯 Focus:</span><br/> Full-Stack Software Development</p>
               </div>
 
               <div>
-                <p className="text-gray-300"><span className="text-green-400 font-bold">💡 Interests:</span><br/> Mobile Apps, Frontend & Backend Development, Cloud Solutions</p>
+                <p className="text-gray-300"><span className="font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">💡 Interests:</span><br/> Mobile Apps, Frontend & Backend Development, Cloud Solutions</p>
               </div>
             </div>
           </div>
@@ -295,9 +315,9 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="px-6 py-24 bg-black border-t border-green-800">
+      <section id="skills" className="px-6 py-24 bg-gradient-to-r from-slate-900/50 to-purple-900/50 border-y border-purple-500/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-green-400">
+          <h2 className="text-5xl font-black text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Technical Skills
           </h2>
 
@@ -305,9 +325,9 @@ export default function Portfolio() {
             {skills.map((skill, index) => (
               <div
                 key={index}
-                className="bg-gray-800 p-6 text-center rounded-lg border border-green-700 hover:border-green-600 transition-colors"
+                className="group bg-slate-800/50 border border-purple-500/30 p-4 text-center rounded-lg hover:border-purple-500/60 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/20 transform hover:scale-105"
               >
-                <p className="font-semibold text-lg text-gray-100">{skill}</p>
+                <p className="font-semibold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text group-hover:from-purple-400 group-hover:to-pink-400">{skill}</p>
               </div>
             ))}
           </div>
@@ -315,8 +335,8 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="px-6 py-24 max-w-6xl mx-auto bg-gray-900">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-green-400">
+      <section id="projects" className="px-6 py-24 max-w-6xl mx-auto">
+        <h2 className="text-5xl font-black text-center mb-16 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
           Featured Projects
         </h2>
 
@@ -324,41 +344,45 @@ export default function Portfolio() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-gray-800 p-8 rounded-lg border border-green-700 hover:border-green-600 transition-colors"
+              className="group bg-slate-800/50 border border-purple-500/30 p-8 rounded-2xl transition-all duration-300 hover:border-purple-500/60 hover:shadow-2xl hover:shadow-purple-500/20 hover:-translate-y-2 backdrop-blur-sm overflow-hidden relative"
             >
-              <h3 className="text-2xl font-bold mb-4 text-green-400">{project.title}</h3>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-300"></div>
 
-              <p className="text-gray-300 leading-7 text-sm mb-4">
-                {expandedProject === index ? project.details : project.description}
-              </p>
+              <div className="relative">
+                <h3 className="text-2xl font-bold mb-4 text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text group-hover:from-purple-400 group-hover:to-pink-400">{project.title}</h3>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech, techIndex) => (
-                  <span
-                    key={techIndex}
-                    className="bg-green-800 text-green-300 px-3 py-1 rounded text-xs font-medium border border-green-700"
+                <p className="text-gray-300 leading-7 text-sm mb-4">
+                  {expandedProject === index ? project.details : project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span
+                      key={techIndex}
+                      className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 px-3 py-1 rounded-full text-xs font-medium border border-blue-500/30"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setExpandedProject(expandedProject === index ? null : index)}
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 py-2 rounded-lg font-semibold transition-all text-sm shadow-lg shadow-purple-500/50"
                   >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+                    {expandedProject === index ? "Show Less" : "Learn More"}
+                  </button>
 
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setExpandedProject(expandedProject === index ? null : index)}
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-semibold transition-colors text-sm"
-                >
-                  {expandedProject === index ? "Show Less" : "Learn More"}
-                </button>
-
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-semibold transition-colors text-sm"
-                >
-                  GitHub
-                </a>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-semibold transition-all text-sm"
+                  >
+                    GitHub
+                  </a>
+                </div>
               </div>
             </div>
           ))}
@@ -366,18 +390,18 @@ export default function Portfolio() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="px-6 py-24 bg-black border-t border-green-800">
+      <section id="experience" className="px-6 py-24 bg-gradient-to-r from-slate-900/50 to-purple-900/50 border-y border-purple-500/30">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-green-400">
+          <h2 className="text-5xl font-black text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
             Professional Experience
           </h2>
 
-          <div className="bg-gray-800 p-8 rounded-lg border border-green-700">
-            <div className="flex items-start gap-4 mb-4">
-              <div className="w-1 h-12 bg-green-400 rounded-full"></div>
+          <div className="bg-slate-800/50 border border-purple-500/30 rounded-2xl p-12 backdrop-blur-sm">
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-1.5 h-16 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
               <div>
-                <h3 className="text-2xl font-bold text-green-400">Plum Systems</h3>
-                <p className="text-green-300 mt-1 font-semibold">Software Development Experience</p>
+                <h3 className="text-3xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text">Plum Systems</h3>
+                <p className="text-purple-400 mt-2 font-semibold">Software Development Experience</p>
               </div>
             </div>
 
@@ -389,8 +413,8 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="px-6 py-24 text-center max-w-5xl mx-auto bg-gray-900">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-green-400">
+      <section id="contact" className="px-6 py-24 text-center max-w-5xl mx-auto">
+        <h2 className="text-5xl font-black mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           Let's Connect
         </h2>
 
@@ -403,7 +427,7 @@ export default function Portfolio() {
             href="https://www.linkedin.com/in/thulani-lunyawo-32a2272b6/"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold transition-colors"
+            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-lg shadow-blue-500/50 transform hover:scale-105"
           >
             LinkedIn
           </a>
@@ -412,14 +436,14 @@ export default function Portfolio() {
             href="https://github.com/ThulaniLunyawo"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gray-700 hover:bg-gray-600 text-white px-8 py-4 rounded-lg font-bold transition-colors"
+            className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-lg shadow-slate-500/50 transform hover:scale-105"
           >
             GitHub
           </a>
 
           <a
             href="mailto:tyesilunyawo@gmail.com"
-            className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold transition-colors"
+            className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-lg shadow-purple-500/50 transform hover:scale-105"
           >
             Email
           </a>
@@ -428,14 +452,14 @@ export default function Portfolio() {
         <div className="grid sm:grid-cols-2 gap-4">
           <a
             href="tel:0655177003"
-            className="border border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-8 py-4 rounded-lg font-bold transition-colors"
+            className="border-2 border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-4 rounded-lg font-bold transition-all backdrop-blur-sm"
           >
             📞 065 517 7003
           </a>
 
           <a
             href="tel:0631659762"
-            className="border border-green-600 text-green-400 hover:bg-green-600 hover:text-white px-8 py-4 rounded-lg font-bold transition-colors"
+            className="border-2 border-purple-500 text-purple-400 hover:bg-purple-500/10 px-8 py-4 rounded-lg font-bold transition-all backdrop-blur-sm"
           >
             📞 063 165 9762
           </a>
@@ -443,8 +467,8 @@ export default function Portfolio() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 border-t border-green-800 text-center text-gray-400 text-sm bg-black">
-        <p>© 2026 Thulani Lunyawo. All rights reserved.</p>
+      <footer className="px-6 py-8 border-t border-purple-500/30 text-center text-gray-400 text-sm bg-slate-900/50">
+        <p>© 2026 Thulani Lunyawo. All rights reserved. | Crafted with passion 💜</p>
       </footer>
     </div>
   );
