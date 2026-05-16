@@ -659,7 +659,7 @@ export default function App() {
             user-focused software that solves real-world problems.
           </p>
           <div className="hero-cta fade-up delay-4">
-            <a href="https://www.linkedin.com/in/thulanilunyawo-32a2272b6/" className="btn-primary" target="_blank" rel="noreferrer">
+            <a href="https://www.linkedin.com/in/thulani-lunyawo-32a2272b6/" className="btn-primary" target="_blank" rel="noreferrer">
               LinkedIn
             </a>
             <a href="https://github.com/ThulaniLunyawo" className="btn-ghost" target="_blank" rel="noreferrer">
@@ -825,7 +825,7 @@ export default function App() {
         </div>
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
           <a href="mailto:tyesilunyawo@gmail.com" className="btn-primary">Email Me</a>
-          <a href="https://www.linkedin.com/in/thulanilunyawo-32a2272b6/" className="btn-ghost" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/thulani-lunyawo-32a2272b6/" className="btn-ghost" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="https://github.com/ThulaniLunyawo" className="btn-ghost" target="_blank" rel="noreferrer">GitHub</a>
           <a href="/Thulani_Lunyawo_Resume.pdf" download="Thulani_Lunyawo_Resume.pdf" className="btn-ghost">Download CV</a>
         </div>
